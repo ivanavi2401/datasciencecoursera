@@ -1,0 +1,436 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={GymWearables},
+  pdfauthor={IvanPoblette},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{GymWearables}
+\author{IvanPoblette}
+\date{2025-08-17}
+
+\begin{document}
+\maketitle
+
+\subsection{Data Preprocessing}\label{data-preprocessing}
+
+Let's Start by loading our CSV data into a DataFrame and clean all the
+columns with garbage data. Lets start importing the CSV file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{csvDF }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pmlTrain.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To build a reliable predictor we need to clean up the dataset and only
+keep the needed data for the model. This could be accomplished with a
+correlation matrix. But before that we need to drop some columns. As per
+the following function suggests, we want to discard all the columns
+whose data is either NAs or empty. Our threshold to discard the column
+was if the total number of records with valid data was more than 95\%
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{selectedCols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (colN }\ControlFlowTok{in} \FunctionTok{colnames}\NormalTok{(csvDF))}
+\NormalTok{\{}
+\NormalTok{  perEmpty }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((csvDF[colN] }\SpecialCharTok{==} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{))}\SpecialCharTok{/} \FunctionTok{nrow}\NormalTok{(csvDF)}
+\NormalTok{  perNA }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(csvDF[colN]))}\SpecialCharTok{/} \FunctionTok{nrow}\NormalTok{(csvDF)}
+  \ControlFlowTok{if}\NormalTok{( (perNA }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ (perEmpty}\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{))}
+\NormalTok{  \{}
+\NormalTok{    selectedCols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(selectedCols, colN)}
+\NormalTok{  \}}
+      
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's subset the data based on those factors, also let's remove the
+timestamp, and user metadata. This data is located in the first seven
+columns of the dataframe
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cleanedcsvDF }\OtherTok{\textless{}{-}}\NormalTok{ csvDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(selectedCols)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using an external vector in selections was deprecated in tidyselect 1.1.0.
+## i Please use `all_of()` or `any_of()` instead.
+##   # Was:
+##   data %>% select(selectedCols)
+## 
+##   # Now:
+##   data %>% select(all_of(selectedCols))
+## 
+## See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cleanedcsvDF}\OtherTok{\textless{}{-}}\NormalTok{ cleanedcsvDF}\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{colnames}\NormalTok{(cleanedcsvDF)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{7}\NormalTok{])}
+\NormalTok{cleanedcsvDF}\SpecialCharTok{$}\NormalTok{classeNumeric }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{factor}\NormalTok{(cleanedcsvDF}\SpecialCharTok{$}\NormalTok{classe))}
+
+\DocumentationTok{\#\# Data sets}
+
+\CommentTok{\#Classification}
+\NormalTok{trainingDFClass }\OtherTok{\textless{}{-}}\NormalTok{ cleanedcsvDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{classeNumeric)}
+\CommentTok{\#Numeric}
+\NormalTok{trainingDF }\OtherTok{\textless{}{-}}\NormalTok{ cleanedcsvDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{classe)}
+\CommentTok{\#Numeric(abs values)}
+\NormalTok{trainingDFNumericAbs }\OtherTok{\textless{}{-}}\NormalTok{ trainingDF }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric), abs))}
+\CommentTok{\#Dumbbell}
+\NormalTok{dumBellClass }\OtherTok{\textless{}{-}}\NormalTok{ trainingDFClass }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{\textquotesingle{}dumbbell\textquotesingle{}}\NormalTok{))}
+\NormalTok{dumBellClass}\SpecialCharTok{$}\NormalTok{classe }\OtherTok{\textless{}{-}}\NormalTok{ trainingDFClass}\SpecialCharTok{$}\NormalTok{classe}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Correlations}\label{correlations}
+
+As we can see from the code below there is no such variable that has
+high correlation with the predicted values. Hence in the follinf section
+we will be using the complete 52 variables for predicting
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example using base R\textquotesingle{}s cor() in a loop}
+\NormalTok{my\_vector }\OtherTok{\textless{}{-}}\NormalTok{ cleanedcsvDF}\SpecialCharTok{$}\NormalTok{classeNumeric}
+\NormalTok{predictors }\OtherTok{\textless{}{-}}\NormalTok{ cleanedcsvDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{classe, }\SpecialCharTok{{-}}\NormalTok{classeNumeric)}
+\NormalTok{correlations }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(predictors, }\ControlFlowTok{function}\NormalTok{(col) }\FunctionTok{cor}\NormalTok{(my\_vector, col, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{))}
+\NormalTok{correlations}\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(correlations)}
+\NormalTok{corrDF }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{correlationWithClass =}\NormalTok{ correlations)}
+\NormalTok{corrDF}\SpecialCharTok{$}\NormalTok{Names }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(predictors)}
+\FunctionTok{print}\NormalTok{(corrDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(correlationWithClass)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 52 x 2
+##    correlationWithClass Names              
+##                   <dbl> <chr>              
+##  1                0.344 pitch_forearm      
+##  2                0.296 magnet_arm_x       
+##  3                0.290 magnet_belt_y      
+##  4                0.257 magnet_arm_y       
+##  5                0.243 accel_arm_x        
+##  6                0.189 accel_forearm_x    
+##  7                0.182 magnet_forearm_x   
+##  8                0.180 magnet_belt_z      
+##  9                0.178 pitch_arm          
+## 10                0.155 total_accel_forearm
+## # i 42 more rows
+\end{verbatim}
+
+\subsection{Traning model Training numeric
+data}\label{traning-model-training-numeric-data}
+
+\subsubsection{Training linear model with all the
+data}\label{training-linear-model-with-all-the-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFit }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(classeNumeric }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . , }\AttributeTok{data =}\NormalTok{ trainingDF, }\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{ )}
+\FunctionTok{print}\NormalTok{(modelFit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 19622 samples
+##    52 predictor
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 19622, 19622, 19622, 19622, 19622, 19622, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE      
+##   1.056085  0.4946926  0.8133357
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+\subsubsection{Training using cross validation(also numeric
+data)}\label{training-using-cross-validationalso-numeric-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFitNumericCV }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(classeNumeric }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . , }\AttributeTok{data =}\NormalTok{ trainingDF, }\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{ , }\AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{\textquotesingle{}cv\textquotesingle{}}\NormalTok{))}
+\FunctionTok{print}\NormalTok{(modelFitNumericCV)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 19622 samples
+##    52 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 17660, 17660, 17660, 17659, 17660, 17661, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE      
+##   1.060054  0.4979891  0.8117365
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+\subsubsection{Training using cross validation(also numeric data casted
+to absolute
+values)}\label{training-using-cross-validationalso-numeric-data-casted-to-absolute-values}
+
+Intution here being that absolute values of accelerations and angles had
+the most importance when doing excercise with proper form
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFitNumericAbs }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(classeNumeric }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . , }\AttributeTok{data =}\NormalTok{ trainingDFNumericAbs, }\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(modelFitNumericAbs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 19622 samples
+##    52 predictor
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 19622, 19622, 19622, 19622, 19622, 19622, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE      
+##   1.089604  0.4999408  0.7900915
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+Seems to be that the variables have not most of a linear relation. Hence
+we well probably need to rely on a non linear prediction model. Let's
+try with random trees \#Traing with random trees
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFitClass }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(classe }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . , }\AttributeTok{data =}\NormalTok{ trainingDFClass, }\AttributeTok{method =} \StringTok{\textquotesingle{}rpart\textquotesingle{}}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFitClassCV }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(classe }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . , }\AttributeTok{data =}\NormalTok{ trainingDFClass, }\AttributeTok{method =} \StringTok{\textquotesingle{}rpart\textquotesingle{}}\NormalTok{ , }\AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{\textquotesingle{}cv\textquotesingle{}}\NormalTok{))}
+\FunctionTok{print}\NormalTok{(modelFitClass)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## CART 
+## 
+## 19622 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 19622, 19622, 19622, 19622, 19622, 19622, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp          Accuracy   Kappa     
+##   0.03567868  0.4944696  0.33750283
+##   0.05998671  0.4053613  0.19290509
+##   0.11515454  0.3213426  0.05925423
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.03567868.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(modelFitClassCV)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## CART 
+## 
+## 19622 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 17661, 17659, 17659, 17660, 17659, 17659, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp          Accuracy   Kappa     
+##   0.03567868  0.5036174  0.35162611
+##   0.05998671  0.4277206  0.22816212
+##   0.11515454  0.3232129  0.05917644
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.03567868.
+\end{verbatim}
+
+seems like they are not doing the job. Let's try with random forest. I
+have already trained the dataset offline, I will just load the object to
+knit run faster
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{modelFitRandomForest }\OtherTok{\textless{}{-}}  \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}randomForestModel.RData\textquotesingle{}}\NormalTok{) }\CommentTok{\#train(classe \textasciitilde{} . , data = trainingDFClass, method = \textquotesingle{}rf\textquotesingle{},  trControl = trainControl(method=\textquotesingle{}cv\textquotesingle{}))}
+\FunctionTok{print}\NormalTok{(modelFitRandomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Random Forest 
+## 
+## 19622 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 19622, 19622, 19622, 19622, 19622, 19622, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy   Kappa    
+##    2    0.9929826  0.9911268
+##   27    0.9927366  0.9908161
+##   52    0.9848800  0.9808813
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 2.
+\end{verbatim}
+
+Ouala! We can see a much nicer accuracy. Finaly lest use our prediction
+model on the test set.
+
+\subsubsection{Testing Quiz}\label{testing-quiz}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{testingDF }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pml{-}testing.csv"}\NormalTok{ )}
+\NormalTok{testingDFParsed }\OtherTok{\textless{}{-}}\NormalTok{ testingDF }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(trainingDFClass)[}\DecValTok{0}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{length}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(trainingDFClass))}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)])}
+\FunctionTok{predict}\NormalTok{(modelFitRandomForest, testingDFParsed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] B A B A A E D B A A B C B A E E A B B B
+## Levels: A B C D E
+\end{verbatim}
+
+\end{document}

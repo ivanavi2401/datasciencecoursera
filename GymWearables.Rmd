@@ -1,0 +1,130 @@
+---
+title: "GymWearables"
+author: "IvanPoblette"
+date: "2025-08-17"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+library(caret)
+library(dplyr)
+library(ggplot2)
+library(randomForest)
+```
+
+## Data Preprocessing
+
+Let's Start by loading our CSV data into a DataFrame and clean all the columns with garbage data. Lets start importing the CSV file
+```{r }
+csvDF <- read.csv("pmlTrain.csv")
+```
+
+To build a reliable predictor we need to clean up the dataset and only keep the needed data for the model. This could be accomplished with a correlation matrix. But before that we need to drop some columns. As per the following function suggests, we want to discard all the columns whose data is either NAs or empty. Our threshold to discard the column was if the total number of records with valid data was more than 95%
+
+```{r}
+selectedCols <- c()
+for (colN in colnames(csvDF))
+{
+  perEmpty <- sum((csvDF[colN] == ''))/ nrow(csvDF)
+  perNA <- sum(is.na(csvDF[colN]))/ nrow(csvDF)
+  if( (perNA < 0.05) & (perEmpty< 0.05))
+  {
+    selectedCols <- c(selectedCols, colN)
+  }
+      
+}
+```
+
+Now let's subset the data based on those factors, also let's remove the timestamp, and user metadata. This data is located in the first seven columns of the dataframe
+```{r}
+cleanedcsvDF <- csvDF %>% select(selectedCols)
+cleanedcsvDF<- cleanedcsvDF%>% select(-colnames(cleanedcsvDF)[1:7])
+cleanedcsvDF$classeNumeric <- as.numeric(factor(cleanedcsvDF$classe))
+
+## Data sets
+
+#Classification
+trainingDFClass <- cleanedcsvDF %>% select(-classeNumeric)
+#Numeric
+trainingDF <- cleanedcsvDF %>% select(-classe)
+#Numeric(abs values)
+trainingDFNumericAbs <- trainingDF %>%
+      mutate(across(where(is.numeric), abs))
+#Dumbbell
+dumBellClass <- trainingDFClass %>% select(contains('dumbbell'))
+dumBellClass$classe <- trainingDFClass$classe
+
+
+
+```
+## Correlations
+
+As we can see from the code below there is no such variable that has high correlation with the predicted values. Hence in the follinf section we will be using the complete 52 variables for predicting
+```{r}
+# Example using base R's cor() in a loop
+my_vector <- cleanedcsvDF$classeNumeric
+predictors <- cleanedcsvDF %>% select(-classe, -classeNumeric)
+correlations <- sapply(predictors, function(col) cor(my_vector, col, method = "pearson"))
+correlations<- abs(correlations)
+corrDF <- tibble(correlationWithClass = correlations)
+corrDF$Names <- colnames(predictors)
+print(corrDF %>% arrange(desc(correlationWithClass)))
+```
+
+## Traning model Training numeric data
+
+### Training linear model with all the data
+```{r}
+set.seed(1234)
+modelFit <- train(classeNumeric ~ . , data = trainingDF, method = 'lm' )
+print(modelFit)
+```
+
+### Training using cross validation(also numeric data)
+```{r}
+set.seed(1234)
+modelFitNumericCV <- train(classeNumeric ~ . , data = trainingDF, method = 'lm' , trControl = trainControl(method='cv'))
+print(modelFitNumericCV)
+```
+### Training using cross validation(also numeric data casted to absolute values)
+Intution here being that absolute values of accelerations and angles had the most importance when doing excercise with proper form
+```{r}
+set.seed(1234)
+modelFitNumericAbs <- train(classeNumeric ~ . , data = trainingDFNumericAbs, method = 'lm')
+print(modelFitNumericAbs)
+```
+
+Seems to be that the variables have not most of a linear relation. Hence we well probably need to rely on a non linear prediction model. Let's try with random trees
+#Traing with random trees
+
+```{r}
+set.seed(1234)
+modelFitClass <- train(classe ~ . , data = trainingDFClass, method = 'rpart')
+set.seed(1234)
+modelFitClassCV <- train(classe ~ . , data = trainingDFClass, method = 'rpart' , trControl = trainControl(method='cv'))
+print(modelFitClass)
+print(modelFitClassCV)
+```
+
+seems like they are not doing the job. Let's try with random forest. I have already trained the dataset offline, I will just load the object to knit run faster
+
+
+```{r}
+set.seed(1234)
+modelFitRandomForest <-  readRDS('randomForestModel.RData') #train(classe ~ . , data = trainingDFClass, method = 'rf',  trControl = trainControl(method='cv'))
+print(modelFitRandomForest)
+```
+
+Ouala! We can see a much nicer accuracy.
+Finaly lest use our prediction model on the test set.
+
+### Testing Quiz
+```{r}
+set.seed(1234)
+testingDF <- read.csv("pml-testing.csv" )
+testingDFParsed <- testingDF %>% select(colnames(trainingDFClass)[0:(length(colnames(trainingDFClass))-1)])
+predict(modelFitRandomForest, testingDFParsed)
+```
+
